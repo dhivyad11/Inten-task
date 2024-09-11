@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="countryApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Cards</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body ng-controller="MainController">
+  <div class="container">
+    <!-- Filter section -->
+    <div class="filter">
+      <input type="text" ng-model="search.name" placeholder="Search by name">
+      
+      <!-- Filter by region title and dropdown -->
+      <div class="region-filter">
+        <label for="regionDropdown" class="filter-title">Filter by Region:</label>
+        <select id="regionDropdown" ng-model="search.region" ng-options="region for region in regions" class="region-dropdown">
+          <option value="">Select region</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="cards">
+      <div class="card" ng-repeat="country in countries | filter:search" ng-click="viewCountry(country.name)">
+        <img ng-src="{{country.flags.png}}" alt="{{country.name}}" class="card-flag">
+        <div class="card-content">
+          <h2>{{country.name}}</h2>
+          <p><strong>Population:</strong> {{country.population | number}}</p>
+          <p><strong>Region:</strong> {{country.region}}</p>
+          <p><strong>Capital:</strong> {{country.capital}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+

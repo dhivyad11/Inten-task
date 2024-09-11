@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Details</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body ng-app="countryApp" ng-controller="CountryController">
+    <div class="details-container">
+        <!-- Dynamic flag from selected country -->
+        <img ng-src="{{selectedCountry.flags.png}}" alt="Flag of {{selectedCountry.name}}" class="details-flag">
+        <div class="details-content">
+            <div class="details-left">
+                <h1>{{selectedCountry.name}}</h1>
+                <p><strong>Capital:</strong> {{selectedCountry.capital}}</p>
+                <p><strong>Population:</strong> {{selectedCountry.population | number}}</p>
+                <p><strong>Region:</strong> {{selectedCountry.region}}</p>
+                <p><strong>Subregion:</strong> {{selectedCountry.subregion}}</p>
+                <p><strong>Area:</strong> {{selectedCountry.area | number}} km²</p>
+                <p><strong>Demonym:</strong> {{selectedCountry.demonym}}</p>
+            </div>
+            <div class="details-right">
+                <p><strong>Languages:</strong> 
+                    <span ng-repeat="language in selectedCountry.languages">
+                        {{language.name}}{{$last ? '' : ', '}}
+                    </span>
+                </p>
+                <p><strong>Currencies:</strong> 
+                    {{selectedCountry.currencies[0].name}} ({{selectedCountry.currencies[0].symbol}})
+                </p>
+                <p><strong>Timezones:</strong> {{selectedCountry.timezones.join(', ')}}</p>
+                <p><strong>Borders:</strong> 
+                    <span ng-repeat="border in selectedCountry.borders">
+                        {{border}}{{$last ? '' : ', '}}
+                    </span>
+                </p>
+                <p><strong>Native Name:</strong> {{selectedCountry.nativeName}}</p>
+                <p><strong>Regional Blocs:</strong> 
+                    <span ng-repeat="bloc in selectedCountry.regionalBlocs">
+                        {{bloc.name}}{{$last ? '' : ', '}}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
